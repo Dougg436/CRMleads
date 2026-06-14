@@ -2,7 +2,7 @@
 
 Sistema web para gerenciamento de leads de empresas, desenvolvido com Flask.
 
-## 🎯 Funcionalidades
+## Funcionalidades
 
 - ✓ Autenticação e login seguro
 - ✓ CRUD completo de leads
@@ -12,14 +12,14 @@ Sistema web para gerenciamento de leads de empresas, desenvolvido com Flask.
 - ✓ Proteção contra SQL Injection, XSS e CSRF
 - ✓ Interface responsiva com Bootstrap
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **Backend**: Python, Flask, SQLAlchemy
 - **Frontend**: HTML5, CSS3, Bootstrap 5, JavaScript
 - **Banco**: MySQL/PostgreSQL/SQLite
 - **Segurança**: Senhas hash, proteção CSRF, validação de entrada
 
-## 📋 Instalação
+## Instalação
 
 ### 1. Ambiente Virtual
 ```bash
@@ -45,7 +45,7 @@ python run.py
 
 Acesse: **http://localhost:5000**
 
-## � Estrutura
+## Estrutura
 
 ```
 projeto-leads/
@@ -61,7 +61,7 @@ projeto-leads/
 └── requirements.txt  → Dependências
 ```
 
-## 🔐 Segurança Implementada
+## Segurança Implementada
 
 - Autenticação com Flask-Login
 - Senhas com hash PBKDF2:SHA256
@@ -71,7 +71,7 @@ projeto-leads/
 - Validação de entrada em todos os campos
 - Controle de acesso por usuário
 
-## � Criar e Testar
+## Criar e Testar
 
 ### Registrar
 1. Acesse http://localhost:5000
@@ -84,7 +84,7 @@ projeto-leads/
 3. Preencha informações da empresa e contato
 4. Veja seus leads no dashboard
 
-## 🧪 Testes
+## Testes
 
 ```bash
 python -m unittest tests.py -v
