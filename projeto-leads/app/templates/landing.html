@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}LeadCRM - Bem-vindo{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-lg-8 mx-auto">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="fas fa-briefcase" style="color: #0d6efd;"></i> LeadCRM
+            </h1>
+            <p class="lead text-muted">
+                Gerencie leads e clientes de forma segura e eficiente
+            </p>
+            
+            {% if not current_user.is_authenticated %}
+                <div class="mt-4">
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </a>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i> Fazer Login
+                    </a>
+                </div>
+            {% else %}
+                <div class="mt-4">
+                    <a href="{{ url_for('leads.list_leads') }}" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-list"></i> Ver Meus Leads
+                    </a>
+                    <a href="{{ url_for('leads.create_lead') }}" class="btn btn-success btn-lg">
+                        <i class="fas fa-plus"></i> Novo Lead
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-lock fa-3x mb-3" style="color: #198754;"></i>
+                        <h5 class="card-title">Seguro</h5>
+                        <p class="card-text">
+                            Autenticação JWT e proteção contra vulnerabilidades (SQL Injection, XSS, CSRF)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line fa-3x mb-3" style="color: #0d6efd;"></i>
+                        <h5 class="card-title">Inteligente</h5>
+                        <p class="card-text">
+                            Gerencie leads por status e visualize estatísticas em tempo real
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-mobile-alt fa-3x mb-3" style="color: #ffc107;"></i>
+                        <h5 class="card-title">Responsivo</h5>
+                        <p class="card-text">
+                            Acesse de qualquer dispositivo com interface moderna e intuitiva
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        {% if not current_user.is_authenticated %}
+            <div class="card mt-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                <div class="card-body text-center py-5">
+                    <h3 class="card-title mb-3">Comece a Gerenciar seus Leads Agora</h3>
+                    <p class="card-text mb-4">
+                        Crie sua conta gratuitamente e tenha acesso a todas as funcionalidades
+                    </p>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-arrow-right"></i> Começar
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

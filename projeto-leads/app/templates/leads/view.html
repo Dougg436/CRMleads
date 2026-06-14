@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lead.company_name }} - LeadCRM{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="mb-0">
+            <i class="fas fa-building"></i> {{ lead.company_name }}
+        </h1>
+        <small class="text-muted">Criado em {{ lead.created_at.strftime('%d/%m/%Y às %H:%M') }}</small>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('leads.edit_lead', lead_id=lead.id) }}" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Editar
+        </a>
+        <form method="POST" action="{{ url_for('leads.delete_lead', lead_id=lead.id) }}" 
+              style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este lead?');">
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Deletar
+            </button>
+        </form>
+        <a href="{{ url_for('leads.list_leads') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Informações Principais -->
+    <div class="col-lg-8 mb-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-building"></i> Informações da Empresa
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="text-muted">Email da Empresa</label>
+                        <p>
+                            <a href="mailto:{{ lead.company_email }}">{{ lead.company_email }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="text-muted">Telefone</label>
+                        <p>{{ lead.company_phone or 'Não informado' }}</p>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="text-muted">Website</label>
+                        <p>
+                            {% if lead.website %}
+                                <a href="{{ lead.website }}" target="_blank">
+                                    {{ lead.website }}
+                                </a>
+                            {% else %}
+                                Não informado
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="text-muted">Setor/Indústria</label>
+                        <p>{{ lead.industry or 'Não informado' }}</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="text-muted">Tamanho da Empresa</label>
+                        <p>{{ lead.company_size or 'Não informado' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-user"></i> Informações do Contato
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="text-muted">Nome</label>
+                        <p><strong>{{ lead.contact_name }}</strong></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="text-muted">Cargo</label>
+                        <p>{{ lead.contact_position or 'Não informado' }}</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="text-muted">Email</label>
+                        <p>
+                            <a href="mailto:{{ lead.contact_email }}">{{ lead.contact_email }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="text-muted">Telefone</label>
+                        <p>{{ lead.contact_phone or 'Não informado' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if lead.description %}
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-sticky-note"></i> Notas
+                </div>
+                <div class="card-body">
+                    <p>{{ lead.description }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Sidebar com Status e Valor -->
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-line"></i> Status
+            </div>
+            <div class="card-body text-center">
+                <span class="badge badge-status-{{ lead.status.value }}" style="font-size: 1.2rem;">
+                    {{ lead.status.value.capitalize() }}
+                </span>
+                
+                <hr>
+                
+                <p class="text-muted mb-0">
+                    Última atualização:<br>
+                    <small>{{ lead.updated_at.strftime('%d/%m/%Y às %H:%M') }}</small>
+                </p>
+            </div>
+        </div>
+
+        {% if lead.estimated_value %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-dollar-sign"></i> Valor Estimado
+                </div>
+                <div class="card-body text-center">
+                    <h3 style="color: #198754;">
+                        R$ {{ "%.2f"|format(lead.estimated_value) }}
+                    </h3>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-info-circle"></i> Histórico
+            </div>
+            <div class="card-body">
+                <div class="mb-2">
+                    <label class="text-muted">Criado em</label>
+                    <p class="mb-0">
+                        {{ lead.created_at.strftime('%d/%m/%Y às %H:%M') }}
+                    </p>
+                </div>
+                <hr>
+                <div class="mb-2">
+                    <label class="text-muted">Última Alteração</label>
+                    <p class="mb-0">
+                        {{ lead.updated_at.strftime('%d/%m/%Y às %H:%M') }}
+                    </p>
+                </div>
+                {% if lead.last_contact %}
+                    <hr>
+                    <div>
+                        <label class="text-muted">Último Contato</label>
+                        <p class="mb-0">
+                            {{ lead.last_contact.strftime('%d/%m/%Y às %H:%M') }}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-4">
+    <a href="{{ url_for('leads.list_leads') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Voltar para Leads
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Lead - LeadCRM{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="mb-4">
+            <h1 class="mb-0">
+                <i class="fas fa-plus"></i> Criar Novo Lead
+            </h1>
+        </div>
+
+        <form method="POST" novalidate>
+            {{ form.csrf_token() }}
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-building"></i> Informações da Empresa
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="company_name" class="form-label">Nome da Empresa*</label>
+                            {{ form.company_name(class="form-control", id="company_name") }}
+                            {% if form.company_name.errors %}
+                                <small class="text-danger">
+                                    {% for error in form.company_name.errors %}
+                                        {{ error }}<br>
+                                    {% endfor %}
+                                </small>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company_email" class="form-label">Email da Empresa*</label>
+                            {{ form.company_email(class="form-control", id="company_email", type="email") }}
+                            {% if form.company_email.errors %}
+                                <small class="text-danger">
+                                    {% for error in form.company_email.errors %}
+                                        {{ error }}<br>
+                                    {% endfor %}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="company_phone" class="form-label">Telefone da Empresa</label>
+                            {{ form.company_phone(class="form-control", id="company_phone", placeholder="(11) 1234-5678") }}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="website" class="form-label">Website</label>
+                            {{ form.website(class="form-control", id="website", placeholder="https://www.empresa.com") }}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="industry" class="form-label">Setor/Indústria</label>
+                            {{ form.industry(class="form-control", id="industry") }}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company_size" class="form-label">Tamanho da Empresa</label>
+                            {{ form.company_size(class="form-select", id="company_size") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-user"></i> Informações do Contato
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="contact_name" class="form-label">Nome do Contato*</label>
+                            {{ form.contact_name(class="form-control", id="contact_name") }}
+                            {% if form.contact_name.errors %}
+                                <small class="text-danger">
+                                    {% for error in form.contact_name.errors %}
+                                        {{ error }}<br>
+                                    {% endfor %}
+                                </small>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="contact_position" class="form-label">Cargo do Contato</label>
+                            {{ form.contact_position(class="form-control", id="contact_position", placeholder="Ex: Gerente de Vendas") }}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="contact_email" class="form-label">Email do Contato*</label>
+                            {{ form.contact_email(class="form-control", id="contact_email", type="email") }}
+                            {% if form.contact_email.errors %}
+                                <small class="text-danger">
+                                    {% for error in form.contact_email.errors %}
+                                        {{ error }}<br>
+                                    {% endfor %}
+                                </small>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="contact_phone" class="form-label">Telefone do Contato</label>
+                            {{ form.contact_phone(class="form-control", id="contact_phone", placeholder="(11) 98765-4321") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i> Informações Comerciais
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="status" class="form-label">Status*</label>
+                            {{ form.status(class="form-select", id="status") }}
+                            {% if form.status.errors %}
+                                <small class="text-danger">
+                                    {% for error in form.status.errors %}
+                                        {{ error }}<br>
+                                    {% endfor %}
+                                </small>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="estimated_value" class="form-label">Valor Estimado (R$)</label>
+                            {{ form.estimated_value(class="form-control", id="estimated_value", type="number", step="0.01", placeholder="10000.00") }}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descrição/Notas</label>
+                        {{ form.description(class="form-control", id="description", rows="4", placeholder="Adicione notas sobre o lead...") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-save"></i> Criar Lead
+                </button>
+                <a href="{{ url_for('leads.list_leads') }}" class="btn btn-secondary btn-lg ms-2">
+                    <i class="fas fa-arrow-left"></i> Cancelar
+                </a>
+            </div>
+
+            <small class="text-muted">* Campos obrigatórios</small>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil do Usuário - LeadCRM{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4">
+            <i class="fas fa-user-circle"></i> Perfil do Usuário
+        </h1>
+        
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-info-circle"></i> Informações Pessoais
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('auth.update_profile') }}">
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Usuário</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="{{ current_user.username }}" disabled>
+                            <small class="text-muted">O usuário não pode ser alterado</small>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   value="{{ current_user.email }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <label for="full_name" class="col-sm-3 col-form-label">Nome Completo</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="full_name" name="full_name" 
+                                   value="{{ current_user.full_name or '' }}" placeholder="Seu nome completo">
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Membro Desde</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" 
+                                   value="{{ current_user.created_at.strftime('%d/%m/%Y %H:%M') }}" disabled>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-sm-9 offset-sm-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Salvar Alterações
+                            </button>
+                            <a href="{{ url_for('main.index') }}" class="btn btn-secondary ms-2">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header bg-danger text-white">
+                <i class="fas fa-exclamation-triangle"></i> Zona de Perigo
+            </div>
+            <div class="card-body">
+                <p class="text-muted">
+                    <strong>Nota:</strong> Para alterar sua senha, por favor contate o administrador.
+                </p>
+                <button class="btn btn-danger" disabled>
+                    <i class="fas fa-lock"></i> Alterar Senha (em breve)
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

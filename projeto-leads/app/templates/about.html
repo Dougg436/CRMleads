@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre - LeadCRM{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4">Sobre LeadCRM</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">O Projeto</h5>
+                <p>
+                    LeadCRM é um sistema de gerenciamento de leads desenvolvido como projeto acadêmico, 
+                    demonstrando as melhores práticas de desenvolvimento web seguro e profissional.
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-shield-alt"></i> Segurança
+                </h5>
+                <ul>
+                    <li>Autenticação segura com Flask-Login e JWT</li>
+                    <li>Proteção contra SQL Injection usando SQLAlchemy parametrizado</li>
+                    <li>Proteção contra XSS com escapamento em templates Jinja2</li>
+                    <li>Proteção contra CSRF com tokens WTForms</li>
+                    <li>Senhas com hash bcrypt de alta segurança</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-layer-group"></i> Arquitetura MVC
+                </h5>
+                <ul>
+                    <li><strong>Model:</strong> SQLAlchemy ORM (User, Lead)</li>
+                    <li><strong>View:</strong> Templates Jinja2 com Bootstrap</li>
+                    <li><strong>Controller:</strong> Blueprints Flask (Auth, Leads, Main)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-cogs"></i> Tecnologias Utilizadas
+                </h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Backend</h6>
+                        <ul>
+                            <li>Python 3.9+</li>
+                            <li>Flask 2.3</li>
+                            <li>Flask-SQLAlchemy</li>
+                            <li>Flask-Login</li>
+                            <li>Flask-JWT-Extended</li>
+                            <li>Flask-WTF</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Frontend</h6>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>Bootstrap 5</li>
+                            <li>JavaScript</li>
+                            <li>Font Awesome Icons</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-list-check"></i> Funcionalidades
+                </h5>
+                <ul>
+                    <li>✓ Registro e autenticação de usuários</li>
+                    <li>✓ CRUD completo de leads</li>
+                    <li>✓ Gerenciamento de status de leads</li>
+                    <li>✓ Busca e filtro de leads</li>
+                    <li>✓ Dashboard com estatísticas</li>
+                    <li>✓ Perfil de usuário</li>
+                    <li>✓ API REST para leads</li>
+                    <li>✓ Interface responsiva</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-user"></i> Desenvolvedor
+                </h5>
+                <p>
+                    Projeto desenvolvido como trabalho acadêmico para demonstrar competências em 
+                    desenvolvimento web seguro e profissional com Python/Flask.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

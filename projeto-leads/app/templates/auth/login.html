@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Login - LeadCRM{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-lg-5 mx-auto">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4">
+                    <i class="fas fa-sign-in-alt"></i> Fazer Login
+                </h2>
+                
+                <form method="POST" novalidate>
+                    {{ form.csrf_token() }}
+                    
+                    <div class="mb-3">
+                        {{ form.username.label(class="form-label") }}
+                        {{ form.username(class="form-control", placeholder="Seu usuário") }}
+                        {% if form.username.errors %}
+                            <small class="text-danger">
+                                {% for error in form.username.errors %}
+                                    {{ error }}<br>
+                                {% endfor %}
+                            </small>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control", placeholder="Sua senha") }}
+                        {% if form.password.errors %}
+                            <small class="text-danger">
+                                {% for error in form.password.errors %}
+                                    {{ error }}<br>
+                                {% endfor %}
+                            </small>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="remember_me">
+                        <label class="form-check-label" for="rememberMe">
+                            Lembrar-me neste computador
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                
+                <hr>
+                
+                <p class="text-center text-muted mb-0">
+                    Não possui conta? 
+                    <a href="{{ url_for('auth.register') }}">
+                        <strong>Registre-se aqui</strong>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
